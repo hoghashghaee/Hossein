@@ -1,0 +1,15 @@
+import cv2
+
+cap = cv2.VideoCapture(0)
+ret, frame = cap.read()
+cv2.imshow('Camera', frame)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+sift = cv2.xfeatures2d.SIFT_create()
+kp, des = sift.detectAndCompute(gray, None)
+img_with_keypoints = cv2.drawKeypoints(frame, kp, None)
+cv2.imshow('Keypoints', img_with_keypoints)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+cap.release()
